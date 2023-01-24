@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
             rayDTime += Time.deltaTime;
 
-            if (rayDTime > 0.4f)
+            if (rayDTime > 0.2f)
             {
                 raydownOff = false;
                 rayDTime = 0.0f;

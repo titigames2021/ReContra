@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,9 +21,29 @@ public class PlayerController : MonoBehaviour
     public float triggerTime;
     public bool canJump;
     public Transform throwpoint;
-    SpriteRenderer sprite;
+    SpriteRenderer playerSprite;
     public Sprite spriteUP;
-    public Sprite spriteRigth;
+    public Sprite spriteUpRight;
+    public Sprite spriteDown;
+    public Sprite spriteDownRight;
+    public Sprite spriteRight;
+    public float lookAt;
+    public bool canMove;
+    public Collider downCollider;
+
+    public bool lookDown;
+    public bool lookUp;
+    public bool lookRight;
+
+    public List<Transform> throwpoints;
+
+    public bool onAir;
+
+
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +51,10 @@ public class PlayerController : MonoBehaviour
         rb=GetComponent<Rigidbody>();
         playerCol=GetComponent<Collider>();
          mask = LayerMask.GetMask("platform");
-        sprite= GetComponent<SpriteRenderer>();
+        playerSprite= GetComponent<SpriteRenderer>();
+        canMove = true;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -46,57 +71,181 @@ public class PlayerController : MonoBehaviour
         //Horizontal Movement
         translation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 
-        transform.Translate(translation, 0, 0);
-        RaycastHit hit;
-       
-       
+        
+            transform.Translate(translation, 0, 0);
 
 
+        //El eje vertical hace que el jugador mire hacia arriba o hacia abajo y cambie el sprite a la situación
 
-        //Jump
+        lookAt = Input.GetAxis("Vertical");
 
-          //Cuando pulsas espacio, el jugador salta y envia un raycast hascia arriba haciendo el el objeto que recibe el rayo se vuelva trigger puediendo atravesar las plataformas 
-         //Cuando terminas de atravesar una plataforma salta en OntriggerExit que devuelve la plataforma a isTRIGGER=false y asi el jugador no atraviesa la platraforma cuando cae 
-        //Cuando pulsamos f hacemos que el jugador sea trigger por milesimas de segundo para poder atravesar y bajar de la plataforma
-
-        if (Input.GetKeyDown(KeyCode.Space)& canJump)
+        //Si el input horizontal es negativo apunta a la izq 
+        if (translation < 0)
         {
-            canJump = false;
-            rb.AddForce(0.0f, jumpForce, 0.0f, ForceMode.Impulse);
-            if (Physics.Raycast(transform.position, Vector3.up, out hit, 10.0f))
-            {
-                Debug.DrawLine(transform.position, hit.point, Color.green);
+            playerSprite.flipX = true;
+            
+           
+        }
+        
+        if(translation> 0)
+        {
+            playerSprite.flipX = false;
+            
+        }
 
-                hit.collider.isTrigger = true;
-                
+       
+
+       //Si el input vertical es 1 el sprite cambiara a uno que este mirando hacia arriba y el throwpoint tomara la posicion que le corresponde y asi con el resto de movimientos
+       //Tambien cambia el collider cuando el jugador toma la posicion de "tumbado"
+
+        if (lookAt == 1)
+        {
+            playerSprite.sprite = spriteUP;
+            
+            downCollider.enabled = false;
+            playerCol.enabled = true;
+            lookUp = true;
+            lookDown = false;
+            if (playerSprite.flipX)
+            {
+                throwpoint = throwpoints[5];
+            }
+            else
+            {
+                throwpoint = throwpoints[4];
+            }
+            
+        }
+        else if (lookAt == -1)
+        {
+            lookUp = false;
+            lookDown = true;
+            canJump=false;
+            playerSprite.sprite = spriteDown;
+           
+            playerCol.enabled = false;
+            downCollider.enabled = true;
+            
+            if (playerSprite.flipX)
+            {
+                throwpoint = throwpoints[3];
+            }
+            else
+            {
+                throwpoint = throwpoints[2];
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            {
+
+
+                downCollider.isTrigger = true;
+
             }
 
+        }
+        else
+        {
+            lookUp = false;
+            lookDown = false;
+            playerSprite.sprite = spriteRight;
+            
+            downCollider.enabled = false;
+            playerCol.enabled = true;
+            throwpoint = throwpoints[0];
+
+            if (playerSprite.flipX)
+            {
+                throwpoint = throwpoints[1];
+            }
 
         }
 
+        
+        if( lookDown && translation!=0)
+        {
+            playerSprite.sprite = spriteDownRight;
+            if(translation < 0)
+            {
+                throwpoint = throwpoints[7];
+            }
+
+            if (translation > 0)
+            {
+                throwpoint = throwpoints[6];
+            }
+            
+        }
+
+        if (lookUp && translation != 0)
+        {
+            playerSprite.sprite = spriteUpRight;
+            
+            if (translation < 0)
+            {
+                throwpoint = throwpoints[9];
+            }
+
+            if (translation > 0)
+            {
+                throwpoint = throwpoints[8];
+            }
+
+        }
+
+        //El jugador solo puede disparar hacia abajo en linea recta si esta saltando 
+        if(lookDown && onAir)
+        {
+            throwpoint = throwpoints[10];
+        }
+
+
+
+
+        // Jump
+
+        //Cuando pulsas espacio, el jugador salta y envia un raycast hascia arriba haciendo el el objeto que recibe el rayo se vuelva trigger puediendo atravesar las plataformas 
+        //Cuando terminas de atravesar una plataforma salta en OntriggerExit que devuelve la plataforma a isTRIGGER=false y asi el jugador no atraviesa la platraforma cuando cae 
+        //Cuando pulsamos f hacemos que el jugador sea trigger por milesimas de segundo para poder atravesar y bajar de la plataforma
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0)&&canJump){
+
+
+
+
+
+                onAir = true;
+                RaycastHit hit;
+                canJump = false;
+                rb.AddForce(0.0f, jumpForce, 0.0f, ForceMode.Impulse);
+                if (Physics.Raycast(transform.position, Vector3.up, out hit, 10.0f))
+                {
+                    Debug.DrawLine(transform.position, hit.point, Color.green);
+
+                    hit.collider.isTrigger = true;
+
+                }
+
+
+            
+        }
 
 
         //Hacemos que el jugador sea trigger por milesimas de segundo para poder atravesar una plataforma y bajar de esta 
 
 
-        if (Input.GetKeyDown("f"))
-        {
+       
 
 
-            playerCol.isTrigger = true;
-
-        }
-
-
-        if (playerCol.isTrigger){
+        if (downCollider.isTrigger){
 
             triggerTime += Time.deltaTime;
 
-            if (triggerTime > 0.4f)
+            if (triggerTime > 0.2f)
             {
-                playerCol.isTrigger= false;
+                downCollider.isTrigger= false;
                 triggerTime = 0.0f;
-                playerCol.isTrigger = false;
+                
             }
         
         }
@@ -106,7 +255,7 @@ public class PlayerController : MonoBehaviour
 
 
          //Cuando el jugador pulsa el boton de disparar llama a la funcion de la clase ObjectPooler la cual le retorna una bala inactiva para colocarla en el disparador y activarla 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
 
             GameObject obj = ObjectPoolerScript.current.GetPooledObject();
@@ -121,34 +270,18 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown("p"))
-        {
-            sprite.sprite = spriteUP;
-        }
-        if (Input.GetKeyDown("l"))
-        {
-            sprite.sprite = spriteRigth;
-        }
-
-        
-
-
-
-
-
-
-
-
-
     }
 
-    
+  
+
+
     //Solo puede saltar despues de pisar una plataforma
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "platform")
         {
             canJump = true;
+            onAir = false;
         }
         
     }

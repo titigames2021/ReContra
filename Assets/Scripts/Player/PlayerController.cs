@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float translation;
     public Rigidbody rb;
-     float gravityForce;
+     public float gravityForce;
     public float setgravity;
     public float jumpForce;
     Collider fielcol;
@@ -55,15 +55,19 @@ public class PlayerController : MonoBehaviour
         canMove = true;
     }
 
+    private void FixedUpdate()
+    {
+        //Gravity
+        rb.AddForce(0.0f, -gravityForce, 0.0f, ForceMode.Force);
+    }
+
 
     // Update is called once per frame
     void Update()
     {
 
-        //Gravity
-        rb.AddForce(0.0f, -gravityForce, 0.0f, ForceMode.Force);
+        
 
-        gravityForce = setgravity;
 
 
 
@@ -282,6 +286,12 @@ public class PlayerController : MonoBehaviour
         {
             canJump = true;
             onAir = false;
+        }
+
+        if (collision.gameObject.tag == "enemy")
+        {
+            Debug.Log("EnemyCollision");
+
         }
         
     }

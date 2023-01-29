@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
-public class ObjectPoolerScript : MonoBehaviour
+public class RiflemanPooledBullets : MonoBehaviour
 {
     //Esta es una clase generica para crear pools de objetos 
 
@@ -13,14 +13,11 @@ public class ObjectPoolerScript : MonoBehaviour
     //public List<GameObject> pooledObject;
     public GameObject pooledObject;
     public int poolMaxSize;
-   public  List<GameObject> pooledObjectsList;
+    List<GameObject> pooledObjectsList;
     public bool willGrow;
     public int bulletType;
 
-    void Awake()
-    {
-        current = this;
-    }
+    
 
 
 
@@ -42,9 +39,9 @@ public class ObjectPoolerScript : MonoBehaviour
         {
             if (!pooledObjectsList[i].activeInHierarchy)
             {
-                
+
                 return pooledObjectsList[i];
-               
+
             }
         }
         //Si activamos este bool cuando nos quedemos sin objetos para instanciar creara nuevos 

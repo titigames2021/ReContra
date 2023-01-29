@@ -7,6 +7,13 @@ public class Enemy : MonoBehaviour
 
     public float life;
     public float speed;
+    Collider enemyCollider;
+
+    private void Start()
+    {
+        enemyCollider= GetComponent<Collider>();
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,7 +30,19 @@ public class Enemy : MonoBehaviour
             gameObject.SetActive(false);
         }
 
+        if (collision.gameObject.tag == "player")
+        {
+            enemyCollider.isTrigger= true;
+        }
 
 
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "player")
+        {
+            enemyCollider.isTrigger = false;
+        }
     }
 }

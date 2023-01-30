@@ -7,12 +7,8 @@ public class Enemy : MonoBehaviour
 
     public float life;
     public float speed;
-    Collider enemyCollider;
+    public Collider enemyCollider;
 
-    private void Start()
-    {
-        enemyCollider= GetComponent<Collider>();
-    }
 
 
     private void OnCollisionEnter(Collision collision)

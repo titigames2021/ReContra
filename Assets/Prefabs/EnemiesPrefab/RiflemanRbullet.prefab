@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4524607466298474875}
   - component: {fileID: 1660405351121704032}
   - component: {fileID: 5472186352071543458}
+  - component: {fileID: 7537876410483765928}
   m_Layer: 0
   m_Name: RiflemanRbullet
   m_TagString: Untagged
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028411647123562137}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5307eb0f527909e4585806878b7578bb, type: 3}
   m_Name: 
@@ -142,3 +143,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06630683, y: 0.05314955, z: 0.037908554}
   m_Center: {x: -0.0007996559, y: 0.000051259995, z: 0.0032186508}
+--- !u!114 &7537876410483765928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028411647123562137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806a24e207afc3b449ba8dd8dea21a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1

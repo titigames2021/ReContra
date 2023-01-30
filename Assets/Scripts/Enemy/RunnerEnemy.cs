@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class RunnerEnemy : Enemy
 {
-   
 
+    private void Start()
+    {
+        enemyCollider=GetComponent<Collider>();
+    }
     // Update is called once per frame
     void Update()
     {

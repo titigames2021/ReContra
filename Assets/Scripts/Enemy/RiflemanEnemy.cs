@@ -13,6 +13,7 @@ public class RiflemanEnemy : Enemy
     public Transform throwpoint;
     public GameObject riflemanBullet;
     public float timeShoot;
+    public ObjectPoolerScript pool;
     // Start is called before the first frame update
     void Start()
     {
@@ -84,8 +85,24 @@ public class RiflemanEnemy : Enemy
 
         if (timeShoot > 1.0f)
         {
-            Instantiate(riflemanBullet, throwpoint.position, throwpoint.rotation);
-            timeShoot = 0.0f;
+           
+            
+
+                GameObject obj = pool.GetPooledObject();
+                if (obj == null) return;
+
+
+
+                obj.transform.position = throwpoint.position;
+                obj.transform.rotation = throwpoint.rotation;
+                obj.SetActive(true);
+
+
+            
+
+
+
+
         }
 
         

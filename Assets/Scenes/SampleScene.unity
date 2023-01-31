@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 51289406}
   m_Layer: 0
   m_Name: RiflemanR
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -304,6 +304,7 @@ MonoBehaviour:
   riflemanBullet: {fileID: 1028411647123562137, guid: b611a664e8f7cd84b93efaea8efc091d,
     type: 3}
   timeShoot: 1.59
+  pool: {fileID: 88222027}
 --- !u!54 &51289406
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -333,6 +334,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25622427, y: 0.3255005, z: 0.2}
   m_Center: {x: -0.023092449, y: 0.02955842, z: 0}
+--- !u!1 &88222026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 88222028}
+  - component: {fileID: 88222027}
+  m_Layer: 0
+  m_Name: EnemyBulletsPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &88222027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88222026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0ffd9e98191e34c8ee7e9becf87054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObject: {fileID: 1028411647123562137, guid: b611a664e8f7cd84b93efaea8efc091d,
+    type: 3}
+  poolMaxSize: 5
+  pooledObjectsList: []
+  willGrow: 0
+  bulletType: 0
+--- !u!4 &88222028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88222026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 224.57188, y: 1.192, z: 10.049021}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &137299383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1915,8 +1966,8 @@ GameObject:
   - component: {fileID: 1181046490}
   - component: {fileID: 1181046489}
   - component: {fileID: 1181046488}
-  - component: {fileID: 1181046487}
   - component: {fileID: 1181046486}
+  - component: {fileID: 1181046491}
   m_Layer: 0
   m_Name: Player
   m_TagString: player
@@ -1937,22 +1988,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.123110294, y: 0.2532009, z: 0.2}
   m_Center: {x: -0.036527872, y: -0.024656415, z: 0}
---- !u!54 &1181046487
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181046485}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!114 &1181046488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,6 +2116,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1181046491
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181046485}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &1247354478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2792,7 +2843,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1724811672}
-  - component: {fileID: 1724811673}
   m_Layer: 0
   m_Name: EnemiesBulletsPool
   m_TagString: Untagged
@@ -2815,23 +2865,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1724811673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724811670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55e7c166ed724674d92488e8017f5b5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObject: {fileID: 1028411647123562137, guid: b611a664e8f7cd84b93efaea8efc091d,
-    type: 3}
-  poolMaxSize: 5
-  willGrow: 0
-  bulletType: 0
 --- !u!1 &1768542753
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,6 +3318,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 758272912708699030, guid: 5453580916164fb4f8831f337818c60f,
+        type: 3}
+      propertyPath: life
+      value: 5.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 758272912708699030, guid: 5453580916164fb4f8831f337818c60f,
+        type: 3}
+      propertyPath: speed
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 758272912708699032, guid: 5453580916164fb4f8831f337818c60f,
         type: 3}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -39,9 +40,33 @@ public class PlayerController : MonoBehaviour
 
     public bool onAir;
 
+    private PlayerInput _input;
+
+    private Vector2 move_input_data;
+
+
+    private void Awake()
+    {
+
+        _input=new PlayerInput();
+
+
+        _input.GeneralMovement.Move.performed += move_performed =>
+        {
+
+            move_input_data = move_performed.ReadValue<Vector2>();
+            Debug.Log("Guapisimo");
+        };
 
 
 
+    }
+    // no se va a llamar porque emos usado un 
+    private void move_performed(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Guapisimo");
+        throw new NotImplementedException();
+    }
 
 
 
@@ -60,6 +85,9 @@ public class PlayerController : MonoBehaviour
         //Gravity
         rb.AddForce(0.0f, -gravityForce, 0.0f, ForceMode.Force);
     }
+
+   
+
 
 
     // Update is called once per frame

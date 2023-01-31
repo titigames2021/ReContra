@@ -5,9 +5,10 @@ using UnityEngine;
 public class BulletDestroy : MonoBehaviour
 {
     //cuando se active el objeto activa la funcincion destroy que desactiva el objeto
+    public float timeDestroy;
      void OnEnable()
     {
-        Invoke("Destroy", 2f);
+        Invoke("Destroy", timeDestroy);
     }
 
      void Destroy()

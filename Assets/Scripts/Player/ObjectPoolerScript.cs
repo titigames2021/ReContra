@@ -30,7 +30,8 @@ public class ObjectPoolerScript : MonoBehaviour
         pooledObjectsList = new List<GameObject>();
         for (int i = 0; i < poolMaxSize; ++i)
         {
-            GameObject obj = (GameObject)Instantiate(pooledObject);
+            GameObject obj = (GameObject)Instantiate(pooledObject, gameObject.transform);
+           
             obj.SetActive(false);
             pooledObjectsList.Add(obj);
         }

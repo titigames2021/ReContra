@@ -13,13 +13,17 @@ public class RiflemanEnemy : Enemy
     public Transform throwpoint;
     public GameObject riflemanBullet;
     public float timeShoot;
+    public ObjectPoolerScript pool;
+    public float fireTime;
+    public bool canShoot;
     // Start is called before the first frame update
     void Start()
     {
         enemySprite=GetComponent<SpriteRenderer>();
         
         enemyCollider=GetComponent<Collider>();
-        
+        //InvokeRepeating("Fire", fireTime, fireTime);
+
     }
 
     // Update is called once per frame
@@ -78,19 +82,35 @@ public class RiflemanEnemy : Enemy
 
         }
 
-        timeShoot += Time.deltaTime;
+         timeShoot += Time.deltaTime;
 
 
-
-        if (timeShoot > 1.0f)
+        if (timeShoot >= .5f)
         {
-            Instantiate(riflemanBullet, throwpoint.position, throwpoint.rotation);
+
+            GameObject obj = pool.GetPooledObject();
+            if (obj == null) return;
+
+            obj.transform.position = throwpoint.position;
+            obj.transform.rotation = throwpoint.rotation;
+            obj.SetActive(true);
+            canShoot = false;
+
+
             timeShoot = 0.0f;
+           
         }
 
+
+
+
+          
         
 
 
 
+
     }
+
+    
 }

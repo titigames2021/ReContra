@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
             triggerTime += Time.deltaTime;
 
-            if (triggerTime > 0.2f)
+            if (triggerTime > 0.5f)
             {
                 downCollider.isTrigger= false;
                 triggerTime = 0.0f;

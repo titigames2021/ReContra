@@ -85,8 +85,8 @@ public class RiflemanEnemy : Enemy
 
         if (timeShoot > 1.0f)
         {
-           
-            
+
+            timeShoot = 0.0f;
 
                 GameObject obj = pool.GetPooledObject();
                 if (obj == null) return;

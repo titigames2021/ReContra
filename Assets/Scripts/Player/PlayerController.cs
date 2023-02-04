@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 move_input_data;
 
+    public float raycastlength;
 
     private void Awake()
     {
@@ -250,7 +251,7 @@ public class PlayerController : MonoBehaviour
                 RaycastHit hit;
                 canJump = false;
                 rb.AddForce(0.0f, jumpForce, 0.0f, ForceMode.Impulse);
-                if (Physics.Raycast(transform.position, Vector3.up, out hit, 10.0f))
+                if (Physics.Raycast(transform.position, Vector3.up, out hit, raycastlength))
                 {
                     Debug.DrawLine(transform.position, hit.point, Color.green);
 

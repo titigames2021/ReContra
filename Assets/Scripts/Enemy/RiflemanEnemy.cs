@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,13 +15,16 @@ public class RiflemanEnemy : Enemy
     public GameObject riflemanBullet;
     public float timeShoot;
     public ObjectPoolerScript pool;
+    public float shootWaitTime;
+    private IEnumerator coroutine;
     // Start is called before the first frame update
     void Start()
     {
         enemySprite=GetComponent<SpriteRenderer>();
         
         enemyCollider=GetComponent<Collider>();
-        
+        coroutine = Shoot(shootWaitTime);
+        StartCoroutine(coroutine);
     }
 
     // Update is called once per frame
@@ -83,31 +87,28 @@ public class RiflemanEnemy : Enemy
 
 
 
-        if (timeShoot > 1.0f)
-        {
-
-            timeShoot = 0.0f;
-
-                GameObject obj = pool.GetPooledObject();
-                if (obj == null) return;
-
-
-
-                obj.transform.position = throwpoint.position;
-                obj.transform.rotation = throwpoint.rotation;
-                obj.SetActive(true);
-
-
-            
-
-
-
-
-        }
+       
 
         
 
 
 
+    }
+
+    private IEnumerator Shoot(float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime);
+           
+            GameObject obj = pool.GetPooledObject();
+            //if (obj == null) return;
+
+            Debug.Log("RILESHOOT");
+
+            obj.transform.position = throwpoint.position;
+            obj.transform.rotation = throwpoint.rotation;
+            obj.SetActive(true);
+        }
     }
 }

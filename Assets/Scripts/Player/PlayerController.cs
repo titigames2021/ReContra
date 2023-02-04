@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerController : MonoBehaviour
 {
@@ -45,7 +46,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 move_input_data;
 
     public float raycastlength;
+    public Vector2 Vrange = Vector2.zero;
+    public Vector2 Hrange = Vector2.zero;
+    public Transform edgepoint;
+    public float cameraspeed;
+    public Transform camperaTrans;
 
+    public GameObject bridge;
     private void Awake()
     {
 
@@ -62,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    // no se va a llamar porque emos usado un 
+   
     private void move_performed(InputAction.CallbackContext obj)
     {
         Debug.Log("Guapisimo");
@@ -87,16 +94,44 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(0.0f, -gravityForce, 0.0f, ForceMode.Force);
     }
 
-   
 
+    private void LateUpdate()
+    {
+        //limits of the player's area of movement
+        gameObject.transform.position = new Vector3(
+
+            Mathf.Clamp(transform.position.x,edgepoint.transform.position.x, Camera.main.transform.position.x+2.5f),
+        Mathf.Clamp(transform.position.y, Vrange.x, Vrange.y),
+            transform.position.z
+
+
+
+
+
+            );
+    }
 
 
     // Update is called once per frame
     void Update()
     {
 
-        
+/*
+        if (transform.position.x >= bridge.transform.position.x)
+        {
+            bridge.SetActive(true);
+        }
 
+        */
+
+
+
+
+        //Baja los fps a la mitad 
+        if (transform.position.x >= Camera.main.transform.position.x)
+        {
+            Camera.main.transform.Translate(Vector3.right * Time.deltaTime * cameraspeed);
+        }
 
 
 
@@ -256,6 +291,7 @@ public class PlayerController : MonoBehaviour
                     Debug.DrawLine(transform.position, hit.point, Color.green);
 
                     hit.collider.isTrigger = true;
+                
 
                 }
 
@@ -321,6 +357,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("EnemyCollision");
 
+        }
+
+        if (collision.gameObject.tag == "bridge")
+        {
+            collision.gameObject.SetActive(true);
         }
         
     }

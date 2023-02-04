@@ -17,6 +17,7 @@ public class RiflemanEnemy : Enemy
     public ObjectPoolerScript pool;
     public float shootWaitTime;
     private IEnumerator coroutine;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -104,7 +105,7 @@ public class RiflemanEnemy : Enemy
             GameObject obj = pool.GetPooledObject();
             //if (obj == null) return;
 
-            Debug.Log("RILESHOOT");
+           
 
             obj.transform.position = throwpoint.position;
             obj.transform.rotation = throwpoint.rotation;

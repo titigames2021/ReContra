@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     public Transform edgepoint;
     public float cameraspeed;
     public Transform camperaTrans;
+    public GameObject falseBridge;
 
     public GameObject bridge;
     private void Awake()
@@ -116,13 +117,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-/*
-        if (transform.position.x >= bridge.transform.position.x)
+
+        if (transform.position.x >= bridge.transform.position.x-2.0f)
         {
             bridge.SetActive(true);
+            falseBridge.SetActive(false);
         }
 
-        */
+        
 
 
 
@@ -359,10 +361,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (collision.gameObject.tag == "bridge")
-        {
-            collision.gameObject.SetActive(true);
-        }
+        
         
     }
 

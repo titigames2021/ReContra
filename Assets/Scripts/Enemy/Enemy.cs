@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour
         {
             life--;
         }
+        if (collision.gameObject.tag == "bullet2")
+        {
+            life = life - 2;
+        }
 
 
 
@@ -26,19 +30,23 @@ public class Enemy : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        if (collision.gameObject.tag == "player")
+        if (collision.gameObject.tag == "r" || collision.gameObject.tag == "s" || collision.gameObject.tag == "b" || collision.gameObject.tag == "f" || collision.gameObject.tag == "l" || collision.gameObject.tag == "m")
         {
             enemyCollider.isTrigger= true;
+            
         }
 
 
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.tag == "player")
+
+        if (other.gameObject.tag == "r" || other.gameObject.tag == "s" || other.gameObject.tag == "b" || other.gameObject.tag == "f" || other.gameObject.tag == "l" || other.gameObject.tag == "m")
         {
             enemyCollider.isTrigger = false;
         }
+        
+       
     }
 }

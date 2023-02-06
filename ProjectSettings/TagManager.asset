@@ -8,6 +8,14 @@ TagManager:
   - bullet
   - enemy
   - player
+  - powerup
+  - r
+  - s
+  - b
+  - f
+  - l
+  - m
+  - bullet2
   layers:
   - Default
   - TransparentFX

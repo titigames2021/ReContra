@@ -54,8 +54,20 @@ public class PlayerController : MonoBehaviour
     public GameObject falseBridge;
 
     public GameObject bridge;
+
+    GameObject objpool;
+    SpriteRenderer objpoolSr;
+    public Sprite spriteBigBullet;
+    int pooln;
+
+    public List<ObjectPoolerScript> pool;
+    Rigidbody rbPool;
+    public float impulseBullet;
+    
+
     private void Awake()
     {
+        pooln = 0;
 
         _input=new PlayerInput();
 
@@ -118,18 +130,12 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        if (transform.position.x >= bridge.transform.position.x-2.0f)
-        {
-            bridge.SetActive(true);
-            falseBridge.SetActive(false);
-        }
-
+        
         
 
 
 
 
-        //Baja los fps a la mitad 
         if (transform.position.x >= Camera.main.transform.position.x)
         {
             Camera.main.transform.Translate(Vector3.right * Time.deltaTime * cameraspeed);
@@ -329,13 +335,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
 
-            GameObject obj = ObjectPoolerScript.current.GetPooledObject();
-            if (obj == null) return;
+             objpool = pool[pooln].GetPooledObject();
+            if (objpool == null) return;
 
-            obj.transform.position = throwpoint.position;
-            obj.transform.rotation = throwpoint.rotation;
-            obj.SetActive(true);
-
+            objpool.transform.position = throwpoint.position;
+            
+           
+            
+            objpool.transform.rotation = throwpoint.rotation;
+            objpool.SetActive(true);
+            
 
         }
 
@@ -355,14 +364,55 @@ public class PlayerController : MonoBehaviour
             onAir = false;
         }
 
-        if (collision.gameObject.tag == "enemy")
-        {
-            Debug.Log("EnemyCollision");
+        
 
+       
+        switch (collision.gameObject.tag)
+        {
+
+
+            case "r":
+
+                Debug.Log("r");
+
+                pooln = 1;
+
+                break;
+            case "s":
+
+                Debug.Log("s");
+                pooln = 1;
+
+                break;
+            case "b":
+
+                Debug.Log("b");
+                pooln = 1;
+
+                break;
+            case "f":
+
+                Debug.Log("f");
+                pooln = 1;
+
+                break;
+            case "l":
+
+                Debug.Log("l");
+                pooln = 1;
+
+                break;
+            case "m":
+
+                Debug.Log("m");
+                pooln = 1;
+
+                break;
         }
 
-        
-        
+
+
+
     }
 
     private void OnTriggerExit(Collider other)

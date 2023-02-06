@@ -55,7 +55,7 @@ public class RifleHiddenMan : Enemy
         while (true)
         {
             yield return new WaitForSeconds(waitTime);
-            print("WaitAndPrint " + Time.time);
+           
             GameObject obj = pool.GetPooledObject();
             //if (obj == null) return;
 

@@ -348,6 +348,7 @@ public class PlayerController : MonoBehaviour
             anim.Play("Jump");
             jumpsr.enabled= true;
             playerSprite.enabled = false;
+            
         }
         else
         {
@@ -364,7 +365,7 @@ public class PlayerController : MonoBehaviour
         //Cuando terminas de atravesar una plataforma salta en OntriggerExit que devuelve la plataforma a isTRIGGER=false y asi el jugador no atraviesa la platraforma cuando cae 
         //Cuando pulsamos f hacemos que el jugador sea trigger por milesimas de segundo para poder atravesar y bajar de la plataforma
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0)|| Input.GetKeyDown(KeyCode.Space) && canJump){
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0)|| Input.GetKeyDown(KeyCode.Space) && canJump&& !onAir){
 
 
 
@@ -467,7 +468,7 @@ public class PlayerController : MonoBehaviour
 
         if (life <= 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }
 
 

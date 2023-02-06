@@ -154,10 +154,10 @@ public class Turret : Enemy
    
     private IEnumerator Shoot(float waitTime)
     {
-        isCoroutineStarted = true;
+        
         while (true)
         {
-           
+            isCoroutineStarted = true;
             yield return new WaitForSeconds(waitTime);
 
             GameObject obj = pool.GetPooledObject();

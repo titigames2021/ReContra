@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
         if (life <= 0)
         {
             gameObject.SetActive(false);
+            StopAllCoroutines();
         }
 
         if (collision.gameObject.tag == "r" || collision.gameObject.tag == "s" || collision.gameObject.tag == "b" || collision.gameObject.tag == "f" || collision.gameObject.tag == "l" || collision.gameObject.tag == "m")

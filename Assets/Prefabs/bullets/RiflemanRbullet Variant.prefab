@@ -65,12 +65,22 @@ PrefabInstance:
     - target: {fileID: 1028411647123562137, guid: b611a664e8f7cd84b93efaea8efc091d,
         type: 3}
       propertyPath: m_Name
-      value: RiflemanRbullet
+      value: RiflemanRbullet Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1028411647123562137, guid: b611a664e8f7cd84b93efaea8efc091d,
         type: 3}
       propertyPath: m_TagString
       value: enemybullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524607466298474875, guid: b611a664e8f7cd84b93efaea8efc091d,
+        type: 3}
+      propertyPath: timeDestroy
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537876410483765928, guid: b611a664e8f7cd84b93efaea8efc091d,
+        type: 3}
+      propertyPath: speed
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b611a664e8f7cd84b93efaea8efc091d, type: 3}

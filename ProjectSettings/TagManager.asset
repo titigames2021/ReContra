@@ -17,6 +17,7 @@ TagManager:
   - m
   - bullet2
   - enemybullet
+  - exit
   layers:
   - Default
   - TransparentFX

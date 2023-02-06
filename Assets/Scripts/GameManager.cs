@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
+    public bool key;
+    public bool gamepad;
+    public int life;
 
     private void Awake()
     {
@@ -26,7 +29,19 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void selectKeyBoard()
+    {
+        
+        key = true;
 
+        
+    }
+
+    public void selectGamepad()
+    {
+
+        gamepad= true;
+    }
 
 
 }

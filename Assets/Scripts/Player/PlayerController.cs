@@ -185,19 +185,34 @@ public class PlayerController : MonoBehaviour
                 Camera.main.transform.Translate(Vector3.right * Time.deltaTime * cameraspeed);
             }
         }
-        
 
 
 
 
-       
+
+
 
 
 
 
         //Horizontal Movement
-        translation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        //translation = Input.GetAxis("HorizontalK") * speed * Time.deltaTime;
+        if (GameManager.Instance.gamepad)
+        {
+            translation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+            lookAt = Input.GetAxis("Vertical");
+        }
+        else if (GameManager.Instance.key)
+        {
+            translation = Input.GetAxis("HorizontalK") * speed * Time.deltaTime;
+            lookAt = Input.GetAxis("VerticalK");
+        }
+        else
+        {
+            translation = Input.GetAxis("HorizontalK") * speed * Time.deltaTime;
+            lookAt = Input.GetAxis("VerticalK");
+        }
+
+
 
 
         transform.Translate(translation, 0, 0);
@@ -205,8 +220,7 @@ public class PlayerController : MonoBehaviour
 
         //El eje vertical hace que el jugador mire hacia arriba o hacia abajo y cambie el sprite a la situación
 
-        lookAt = Input.GetAxis("Vertical");
-        //lookAt = Input.GetAxis("VerticalK");
+       
 
         //Si el input horizontal es negativo apunta a la izq 
         if (translation < 0)
@@ -453,7 +467,7 @@ public class PlayerController : MonoBehaviour
 
         if (life <= 0)
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
 
 
@@ -500,6 +514,7 @@ public class PlayerController : MonoBehaviour
             case "enemybullet":
 
                 life--;
+                
                 lifecanvas[life].enabled = false;
 
 
@@ -508,6 +523,13 @@ public class PlayerController : MonoBehaviour
 
                 life--;
                 lifecanvas[life].enabled = false;
+
+
+                break;
+
+            case "exit":
+
+                SceneManager.LoadScene(2);
 
 
                 break;

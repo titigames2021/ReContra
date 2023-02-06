@@ -28,24 +28,36 @@ public class RifleHiddenMan : Enemy
 
     }
 
+   
+
     //Metodo que desactiva o activa el sprite de "visible" y llama al metodo "Shoot" cuando el sprite "visible" este activado
     void Visible()
     {
-       
-        if(enemyVisibleSprite.enabled) {
-            enemyVisibleSprite.enabled = false;
-            StopCoroutine(coroutine);
-            col.enabled = false;
+        if(life > 0){
+            if (enemyVisibleSprite.enabled)
+            {
+                enemyVisibleSprite.enabled = false;
+                StopCoroutine(coroutine);
+                col.enabled = false;
+            }
+            else
+            {
+                enemyVisibleSprite.enabled = true;
+                StartCoroutine(coroutine);
+                col.enabled = true;
+
+
+
+            }
+
         }
         else
         {
-            enemyVisibleSprite.enabled = true;
-            StartCoroutine(coroutine);
-            col.enabled= true;
-
-
-
+            StopAllCoroutines();
         }
+        
+
+        
 
 
     }

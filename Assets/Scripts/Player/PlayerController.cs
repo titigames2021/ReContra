@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public SpriteRenderer jumpsr;
     public List<Image> lifecanvas;
+    public GameObject edgepointR;
 
 
     private void Awake()
@@ -126,17 +127,32 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         //limits of the player's area of movement
-        gameObject.transform.position = new Vector3(
-
-            Mathf.Clamp(transform.position.x,edgepoint.transform.position.x, Camera.main.transform.position.x+2.5f),
-        Mathf.Clamp(transform.position.y, Vrange.x, Vrange.y),
-            transform.position.z
+        
 
 
+        if (SceneManager.GetSceneByName("level2").isLoaded)
+        {
+            gameObject.transform.position = new Vector3(
+
+           Mathf.Clamp(transform.position.x, edgepoint.transform.position.x, edgepointR.transform.position.x),
+           Mathf.Clamp(transform.position.y, Vrange.x, Camera.main.transform.position.y + 1.5f),
+           transform.position.z);
+        }
+        else
+        {
+            gameObject.transform.position = new Vector3(
+
+            Mathf.Clamp(transform.position.x, edgepoint.transform.position.x, Camera.main.transform.position.x + 2.5f),
+            Mathf.Clamp(transform.position.y, Vrange.x, Vrange.y),
+            transform.position.z);
+
+        }
 
 
 
-            );
+
+
+
     }
 
 
@@ -145,16 +161,33 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        
-        
-
-
-
-
-        if (transform.position.x >= Camera.main.transform.position.x)
+        if (SceneManager.GetSceneByName("level2").isLoaded)
         {
-            Camera.main.transform.Translate(Vector3.right * Time.deltaTime * cameraspeed);
+
+            if (transform.position.y >= Camera.main.transform.position.y)
+            {
+                Camera.main.transform.Translate(Vector3.up * Time.deltaTime * cameraspeed);
+            }
+
+            if (transform.position.y <= Camera.main.transform.position.y-1.5f)
+            {
+                Camera.main.transform.Translate(Vector3.down * Time.deltaTime * (cameraspeed*2.0f));
+            }
+
         }
+        else
+        {
+            if (transform.position.x >= Camera.main.transform.position.x)
+            {
+                Camera.main.transform.Translate(Vector3.right * Time.deltaTime * cameraspeed);
+            }
+        }
+        
+
+
+
+
+       
 
 
 

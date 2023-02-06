@@ -173,7 +173,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e843952a9ee03f64899f3c838b949680, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0249d2d72a47f34298d2d6a2992004c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,9 +200,9 @@ MonoBehaviour:
   speed: 0
   enemyCollider: {fileID: 0}
   playerTransform: {fileID: 0}
-  pointRight: {fileID: 21300000, guid: e843952a9ee03f64899f3c838b949680, type: 3}
+  pointRight: {fileID: 21300000, guid: c0249d2d72a47f34298d2d6a2992004c, type: 3}
   enemySprite: {fileID: 0}
-  pointUp: {fileID: 21300000, guid: 5fc5e50285e8d684899fff25145321b2, type: 3}
+  pointUp: {fileID: 21300000, guid: b4ecc89c03fb9b648b9df85adab329f3, type: 3}
   throwpoints:
   - {fileID: 5574100727533355522}
   - {fileID: 5574100727171599599}
@@ -225,8 +225,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.25622427, y: 0.31306136, z: 0.2}
-  m_Center: {x: -0.023092449, y: 0.023338854, z: 0}
+  m_Size: {x: 0.15025313, y: 0.28791565, z: 0.20000002}
+  m_Center: {x: 0.029893158, y: -0.0036029667, z: 0}
 --- !u!54 &5574100727498778935
 Rigidbody:
   m_ObjectHideFlags: 0

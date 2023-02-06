@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    int life = 4;
     public float speed;
     public float translation;
     public Rigidbody rb;
@@ -66,7 +69,14 @@ public class PlayerController : MonoBehaviour
     public List<ObjectPoolerScript> pool;
     Rigidbody rbPool;
     public float impulseBullet;
-    
+
+
+
+
+    public Animator anim;
+    public SpriteRenderer jumpsr;
+    public List<Image> lifecanvas;
+
 
     private void Awake()
     {
@@ -102,6 +112,8 @@ public class PlayerController : MonoBehaviour
          mask = LayerMask.GetMask("platform");
         playerSprite= GetComponent<SpriteRenderer>();
         canMove = true;
+      
+
     }
 
     private void FixedUpdate()
@@ -276,6 +288,19 @@ public class PlayerController : MonoBehaviour
         if(lookDown && onAir)
         {
             throwpoint = throwpoints[10];
+            //animacion  
+        }
+
+        if (onAir)
+        {
+            anim.Play("Jump");
+            jumpsr.enabled= true;
+            playerSprite.enabled = false;
+        }
+        else
+        {
+            playerSprite.enabled = true;
+            jumpsr.enabled = false;
         }
 
 
@@ -385,6 +410,11 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        if (life <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
+
 
     }
 
@@ -394,12 +424,7 @@ public class PlayerController : MonoBehaviour
     //Solo puede saltar despues de pisar una plataforma
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "platform")
-        {
-            canJump = true;
-            onAir = false;
-        }
-
+        
         
 
        
@@ -422,9 +447,33 @@ public class PlayerController : MonoBehaviour
                 collision.gameObject.SetActive(false);
 
                 break;
-            
+
+
+            case "platform":
+
+                canJump = true;
+                onAir = false;
+
+                break;
+
+            case "enemybullet":
+
+                life--;
+                lifecanvas[life].enabled = false;
+
+
+                break;
+            case "enemy":
+
+                life--;
+                lifecanvas[life].enabled = false;
+
+
+                break;
+
         }
 
+        
 
 
 

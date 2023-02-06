@@ -23,7 +23,7 @@ public class BulletDestroy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "enemy")
+        if (collision.gameObject.tag == "enemy"|| collision.gameObject.tag == "player")
         {
             Invoke("Destroy", 0f);
         }

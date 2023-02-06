@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1989999068711955488, guid: fddd2abe3a1d6c04385037a5d1fbbf7d,
         type: 3}
       propertyPath: timeDestroy
-      value: 2.12
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 3400330819969010120, guid: fddd2abe3a1d6c04385037a5d1fbbf7d,
         type: 3}
@@ -86,6 +86,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GatBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300623446406368170, guid: fddd2abe3a1d6c04385037a5d1fbbf7d,
+        type: 3}
+      propertyPath: m_TagString
+      value: enemybullet
       objectReference: {fileID: 0}
     - target: {fileID: 6792511845802387038, guid: fddd2abe3a1d6c04385037a5d1fbbf7d,
         type: 3}

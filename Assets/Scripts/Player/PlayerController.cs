@@ -77,6 +77,8 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer jumpsr;
     public List<Image> lifecanvas;
     public GameObject edgepointR;
+   public AudioSource audioS;
+    public AudioClip aClip;
 
 
     private void Awake()
@@ -113,6 +115,7 @@ public class PlayerController : MonoBehaviour
          mask = LayerMask.GetMask("platform");
         playerSprite= GetComponent<SpriteRenderer>();
         canMove = true;
+        audioS = GetComponent<AudioSource>();
       
 
     }
@@ -194,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
         //Horizontal Movement
         translation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        translation = Input.GetAxis("HorizontalK") * speed * Time.deltaTime;
+        //translation = Input.GetAxis("HorizontalK") * speed * Time.deltaTime;
 
 
         transform.Translate(translation, 0, 0);
@@ -203,7 +206,7 @@ public class PlayerController : MonoBehaviour
         //El eje vertical hace que el jugador mire hacia arriba o hacia abajo y cambie el sprite a la situación
 
         lookAt = Input.GetAxis("Vertical");
-        lookAt = Input.GetAxis("VerticalK");
+        //lookAt = Input.GetAxis("VerticalK");
 
         //Si el input horizontal es negativo apunta a la izq 
         if (translation < 0)
@@ -398,7 +401,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button1)||Input.GetKeyDown(KeyCode.Mouse0))
         {
 
-            
+
+           
             if (pooln ==2 )
             {
                 objpool2 = pool[1].GetPooledObject();
@@ -423,7 +427,9 @@ public class PlayerController : MonoBehaviour
                 if (objpool4 == null) return;
                 objpool4.transform.position = throwpoint.position;
                 objpool4.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -60.0f) * throwpoint.rotation;
+
                 objpool4.SetActive(true);
+                audioS.PlayOneShot(aClip);
             }
             else
             {
@@ -435,8 +441,8 @@ public class PlayerController : MonoBehaviour
 
                 objpool.transform.rotation = throwpoint.rotation;
 
-                
 
+                audioS.PlayOneShot(aClip);
                 objpool.SetActive(true);
                
             }

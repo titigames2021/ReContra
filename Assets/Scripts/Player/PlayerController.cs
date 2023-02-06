@@ -194,14 +194,16 @@ public class PlayerController : MonoBehaviour
 
         //Horizontal Movement
         translation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        translation = Input.GetAxis("HorizontalK") * speed * Time.deltaTime;
 
-        
-            transform.Translate(translation, 0, 0);
+
+        transform.Translate(translation, 0, 0);
 
 
         //El eje vertical hace que el jugador mire hacia arriba o hacia abajo y cambie el sprite a la situación
 
         lookAt = Input.GetAxis("Vertical");
+        lookAt = Input.GetAxis("VerticalK");
 
         //Si el input horizontal es negativo apunta a la izq 
         if (translation < 0)
@@ -259,7 +261,7 @@ public class PlayerController : MonoBehaviour
                 throwpoint = throwpoints[2];
             }
             
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0)|| Input.GetKeyDown(KeyCode.Space))
             {
 
 
@@ -345,7 +347,7 @@ public class PlayerController : MonoBehaviour
         //Cuando terminas de atravesar una plataforma salta en OntriggerExit que devuelve la plataforma a isTRIGGER=false y asi el jugador no atraviesa la platraforma cuando cae 
         //Cuando pulsamos f hacemos que el jugador sea trigger por milesimas de segundo para poder atravesar y bajar de la plataforma
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0)&&canJump){
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0)|| Input.GetKeyDown(KeyCode.Space) && canJump){
 
 
 
@@ -393,7 +395,7 @@ public class PlayerController : MonoBehaviour
 
 
          //Cuando el jugador pulsa el boton de disparar llama a la funcion de la clase ObjectPooler la cual le retorna una bala inactiva para colocarla en el disparador y activarla 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1)||Input.GetKeyDown(KeyCode.Mouse0))
         {
 
             
@@ -445,7 +447,7 @@ public class PlayerController : MonoBehaviour
 
         if (life <= 0)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
 
 

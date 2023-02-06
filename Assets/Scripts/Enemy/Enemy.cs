@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
         }
         if (collision.gameObject.tag == "bullet2")
         {
-            life = life - 2;
+            life = life - 2f;
         }
 
 

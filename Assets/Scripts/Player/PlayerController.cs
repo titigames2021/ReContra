@@ -56,6 +56,9 @@ public class PlayerController : MonoBehaviour
     public GameObject bridge;
 
     GameObject objpool;
+    GameObject objpool2;
+    GameObject objpool3;
+    GameObject objpool4;
     SpriteRenderer objpoolSr;
     public Sprite spriteBigBullet;
     int pooln;
@@ -335,16 +338,49 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
 
-             objpool = pool[pooln].GetPooledObject();
-            if (objpool == null) return;
+            
+            if (pooln ==2 )
+            {
+                objpool2 = pool[1].GetPooledObject();
+                if (objpool2 == null) return;
+                objpool2.transform.position = throwpoint.position;
+                objpool2.transform.rotation =throwpoint.rotation *Quaternion.Euler(0.0f, 0.0f, 30.0f);
+                objpool2.SetActive(true);
+                //
+                objpool3 = pool[1].GetPooledObject();
+                if (objpool3 == null) return;
+                objpool3.transform.position = throwpoint.position;
+                objpool3.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f) * throwpoint.rotation;
+                objpool3.SetActive(true);
+                //
+                objpool3 = pool[1].GetPooledObject();
+                if (objpool3 == null) return;
+                objpool3.transform.position = throwpoint.position;
+                objpool3.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -30.0f) * throwpoint.rotation;
+                objpool3.SetActive(true);
+                //
+                objpool4 = pool[1].GetPooledObject();
+                if (objpool4 == null) return;
+                objpool4.transform.position = throwpoint.position;
+                objpool4.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -60.0f) * throwpoint.rotation;
+                objpool4.SetActive(true);
+            }
+            else
+            {
+                objpool = pool[pooln].GetPooledObject();
+               
+                if (objpool == null) return;
 
-            objpool.transform.position = throwpoint.position;
-            
-           
-            
-            objpool.transform.rotation = throwpoint.rotation;
-            objpool.SetActive(true);
-            
+                objpool.transform.position = throwpoint.position;
+
+                objpool.transform.rotation = throwpoint.rotation;
+
+                
+
+                objpool.SetActive(true);
+               
+            }
+
 
         }
 
@@ -376,38 +412,17 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("r");
 
                 pooln = 1;
+                collision.gameObject.SetActive(false);
 
                 break;
             case "s":
 
                 Debug.Log("s");
-                pooln = 1;
+                pooln = 2;
+                collision.gameObject.SetActive(false);
 
                 break;
-            case "b":
-
-                Debug.Log("b");
-                pooln = 1;
-
-                break;
-            case "f":
-
-                Debug.Log("f");
-                pooln = 1;
-
-                break;
-            case "l":
-
-                Debug.Log("l");
-                pooln = 1;
-
-                break;
-            case "m":
-
-                Debug.Log("m");
-                pooln = 1;
-
-                break;
+            
         }
 
 

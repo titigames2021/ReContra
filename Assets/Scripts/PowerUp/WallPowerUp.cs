@@ -5,8 +5,10 @@ using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class WallPowerUp : DropPowerUp
+public class WallPowerUp : MonoBehaviour
 {
+    public float life;
+    public List<GameObject> powerUps;
     GameObject pu;
     private IEnumerator coroutine;
     public float impulse;
@@ -15,6 +17,8 @@ public class WallPowerUp : DropPowerUp
     GameObject finalpu;
     Rigidbody rb;
     Collider col;
+    public Sprite desactivated;
+    SpriteRenderer _spriteRenderer;
    
     // Start is called before the first frame update
     void Start()
@@ -22,6 +26,8 @@ public class WallPowerUp : DropPowerUp
         Debug.Log(powerUps.Capacity);
          pu = powerUps[Random.Range(0,powerUps.Capacity)];
         coroutine = Fall(2f);
+        _spriteRenderer= GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -40,6 +46,7 @@ public class WallPowerUp : DropPowerUp
 
 
             dropped = true;
+            _spriteRenderer.sprite = desactivated;
         }
 
         if (dropped)
@@ -55,7 +62,7 @@ public class WallPowerUp : DropPowerUp
 
         }
 
-
+        
 
 
 

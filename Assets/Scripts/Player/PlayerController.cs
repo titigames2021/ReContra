@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    int life = 4;
+    int life = 7;
     public float speed;
     public float translation;
     public Rigidbody rb;
@@ -365,7 +365,7 @@ public class PlayerController : MonoBehaviour
         //Cuando terminas de atravesar una plataforma salta en OntriggerExit que devuelve la plataforma a isTRIGGER=false y asi el jugador no atraviesa la platraforma cuando cae 
         //Cuando pulsamos f hacemos que el jugador sea trigger por milesimas de segundo para poder atravesar y bajar de la plataforma
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0)|| Input.GetKeyDown(KeyCode.Space) && canJump&& !onAir){
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button0)|| Input.GetKeyDown(KeyCode.Space) )&& canJump && !onAir){
 
 
 
